@@ -1,0 +1,12 @@
+// src/portals/buyer/pages/Cart.tsx
+import React from "react";
+
+const Cart: React.FC = () => {
+  return (
+    <div>
+      <h1>Cart Page</h1>
+    </div>
+  );
+};
+
+export default Cart; // <-- must have default export

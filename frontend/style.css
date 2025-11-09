@@ -1,0 +1,297 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica", sans-serif;
+}
+
+/* ---------------------------------------------------- */
+/* --- GENERAL BODY --- */
+/* ---------------------------------------------------- */
+
+body {
+  background: #fff;
+  color: #222;
+  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
+   padding-bottom: 60px;
+}
+
+/* ---------------------------------------------------- */
+/* --- LEFT COLUMN --- */
+/* ---------------------------------------------------- */
+
+.left-column {
+  min-height: 100vh; /* Full screen height */
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f0ee;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.brand-header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+  color: #333;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Hero image in left column */
+.hero-image {
+  flex: 0 0 auto;
+  height: 100vh; /* Occupies 90% of screen height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-image img,
+.img-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fill nicely */
+}
+
+/* ---------------------------------------------------- */
+/* --- RIGHT COLUMN --- */
+/* ---------------------------------------------------- */
+
+.right-column {
+  background-color: #fff;
+  min-height: 100vh; /* Match left column height */
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.2rem 5%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #0077cc;
+}
+
+/* Hero content inside right column */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hero-text p.lead {
+  color: #777;
+  font-style: italic;
+  margin-top: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.btn-outline-dark {
+  border-radius: 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0.8rem 1.5rem;
+  background: #0c4da2;
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-outline-dark:hover {
+  background: #09397d;
+}
+
+/* ---------------------------------------------------- */
+/* --- PRODUCT CARDS --- */
+/* ---------------------------------------------------- */
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.product-card {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.product-card h4 {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.product-card p {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* ---------------------------------------------------- */
+/* --- FOOTER --- */
+/* ---------------------------------------------------- */
+
+.footer {
+  margin-top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1.2rem 5%;
+  background: #111;
+  color: #fff;
+  border-top: none;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.socials a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #ccc;
+}
+
+/* ---------------------------------------------------- */
+/* --- RESPONSIVE --- */
+/* ---------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    padding: 1rem 0;
+  }
+
+  .products {
+    justify-content: center;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+.socials a {
+  font-size: 1.2rem; /* Adjust icon size */
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #0077cc; /* Hover color */
+}
+
+
+.footer {
+  position: fixed;       /* Fix footer at bottom */
+  bottom: 0;             /* Align to bottom */
+  left: 0;               /* Align to left edge */
+  width: 100%;           /* Full width */
+  z-index: 100;          /* Ensure it stays on top of content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 5%;
+  background-color: #111; /* Dark background */
+  color: #fff;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Optional: subtle shadow */
+}
+
+/* Optional: adjust social icons for fixed footer */
+.footer .socials a {
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+.footer .socials a:hover {
+  color: #646cff;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+  }
+}
