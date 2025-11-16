@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 require("dotenv").config();
+const { generateTokens } = require("../utils/generateTokens");
 
 class BaseAuthController {
   // ---------------- REGISTER ----------------
@@ -26,7 +27,7 @@ class BaseAuthController {
     }
 
     try {
-      // 🏢 Verify tenant exists and active
+      // Validate tenant
       const [tenants] = await pool.execute(
         "SELECT * FROM enterprise WHERE name = ? AND status = 'ACTIVE'",
         [tenantName]
@@ -42,7 +43,6 @@ class BaseAuthController {
       const isIndianMarketPlace =
         tenantName.toLowerCase() === "indianmarketplace";
 
-      // 🔍 Check for existing username
       const userTable = isIndianMarketPlace ? "super_admin_users" : "users";
       const idColumn = isIndianMarketPlace ? "admin_user_id" : "user_id";
 
@@ -59,10 +59,8 @@ class BaseAuthController {
         return res.status(409).json({ error: "Username or email already exists" });
       }
 
-      // 🔐 Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Insert user based on tenant
       if (isIndianMarketPlace) {
         await pool.execute(
           `INSERT INTO super_admin_users
@@ -82,8 +80,8 @@ class BaseAuthController {
       } else {
         await pool.execute(
           `INSERT INTO users
-          (enterprise_id, username, password, email, first_name, middle_name, last_name, phone_number, type_id, creation_date)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
+            (enterprise_id, username, password, email, first_name, middle_name, last_name, phone_number, type_id, creation_date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
           [
             enterprise_id,
             username,
@@ -105,7 +103,7 @@ class BaseAuthController {
     }
   }
 
-  // ---------------- LOGIN (username or email) ----------------
+  // ---------------- LOGIN ----------------
   async login(req, res) {
     const { username, password } = req.body;
     const tenantName = req.headers["x-tenant-name"];
@@ -117,7 +115,7 @@ class BaseAuthController {
     }
 
     try {
-      // 🏢 Validate tenant
+      // Validate tenant
       const [tenants] = await pool.execute(
         "SELECT * FROM enterprise WHERE name = ? AND status = 'ACTIVE'",
         [tenantName]
@@ -129,15 +127,12 @@ class BaseAuthController {
         });
       }
 
-      const enterprise = tenants[0];
-      const enterprise_id = enterprise.enterprise_id;
+      const enterprise_id = tenants[0].enterprise_id;
       const isIndianMarketPlace =
         tenantName.toLowerCase() === "indianmarketplace";
 
-      // 👤 Fetch user using username OR email
       let query, params;
       if (isIndianMarketPlace) {
-        console.log("👑 Admin login called");
         query = `
           SELECT sau.*, e.name AS enterprise_name
           FROM super_admin_users sau
@@ -148,7 +143,6 @@ class BaseAuthController {
         `;
         params = [username, username, tenantName];
       } else {
-        console.log("🏢 Tenant user login called");
         query = `
           SELECT u.*, e.name AS enterprise_name
           FROM users u
@@ -168,48 +162,37 @@ class BaseAuthController {
 
       const user = users[0];
 
-      // 🧩 Debug info
-      console.log("🧍 User:", user.username);
-      console.log("🏢 Tenant:", tenantName);
-      console.log("🔐 Stored hash:", user.password);
-      console.log("🧾 Input password:", password);
-
-      // ✅ Compare password
-      let passwordMatch = await bcrypt.compare(password, user.password);
-
-      // 🔄 Fallback: handle double-hash case
-      if (!passwordMatch) {
-        const inputHash = await bcrypt.hash(password, 10);
-        if (inputHash === user.password) {
-          passwordMatch = true;
-          console.warn("⚠️ Password matched via fallback (possible double-hash detected)");
-        }
-      }
-
-      console.log("Password match:", passwordMatch);
+      // Compare password
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
         return res.status(401).json({ error: "Invalid username/email or password" });
       }
 
-      // 🎟️ Create JWT token
-      const token = jwt.sign(
-        {
-          sub: isIndianMarketPlace ? user.admin_user_id : user.user_id,
-          username: user.username,
-          enterprise_id,
-          tenantName,
-          type_id: user.type_id || null,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.ACCESS_TOKEN_TTL_SECONDS || "1h" }
-      );
+      // ------------------------ GENERATE ACCESS + REFRESH TOKENS ------------------------
+      const { accessToken, refreshToken } = generateTokens({
+        sub: isIndianMarketPlace ? user.admin_user_id : user.user_id,
+        username: user.username,
+        enterprise_id,
+        tenantName,
+        type_id: user.type_id || null,
+      });
 
-      res.json({
-        access_token: token,
+      // ------------------------ SEND REFRESH TOKEN IN HTTP-ONLY COOKIE ------------------------
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: false, // 🔥 Set true in production
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+
+      // ------------------------ RESPONSE ------------------------
+      return res.json({
+        access_token: accessToken,
         token_type: "Bearer",
         enterprise_name: tenantName,
       });
+
     } catch (err) {
       console.error("❌ Login error:", err);
       res.status(500).json({

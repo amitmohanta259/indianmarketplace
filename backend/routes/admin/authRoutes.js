@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../../controllers/admin/adminAuthController");
-const jwtAuth = require("../../middlewares/jwtAuth");
-const tenantMiddleware = require("../../middlewares/tenantMiddleware");
 
-router.use(tenantMiddleware);
+const adminAuthController = require("../../controllers/admin/adminAuthController");
+const refreshTokenController = require("../../controllers/refreshTokenController");
 
-router.post("/register", controller.register);
-router.post("/login", controller.login);
-router.post("/logout", jwtAuth, controller.logout);
+// ⛔ No jwtAuth — register and login are public
+router.post("/register", adminAuthController.register);
+router.post("/login", adminAuthController.login);
+
+// ⛔ Do NOT protect logout with jwtAuth
+// Logout only needs refreshToken (from cookie)
+router.post("/logout", adminAuthController.logout);
+
+// ✔ Refresh token endpoint (public — uses cookie)
+router.post("/refresh-token", refreshTokenController);
 
 module.exports = router;
