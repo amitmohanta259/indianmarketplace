@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import backgroundMap from "./backgrounds";
-import "./Auth.css";
+import backgroundMap from "../../components/Auth/backgrounds";
+import "../../components/Auth/Auth.css";
 
-interface RegistrationProps {
+
+interface LoginProps {
   userType?: "consumer" | "admin" | "enterprise";
 }
 
-const Registration: React.FC<RegistrationProps> = ({ userType = "consumer" }) => {
+const Login: React.FC<LoginProps> = ({ userType = "consumer" }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,10 +25,10 @@ const Registration: React.FC<RegistrationProps> = ({ userType = "consumer" }) =>
       ? "ADMIN"
       : "ENTERPRISE";
 
-  // ✅ Navigation to login page based on user type
-  const handleBackToLogin = () => {
-    if (currentType === "consumer") navigate("/login");
-    else navigate(`/login/${currentType}`);
+  // Navigate to registration based on type
+  const handleRegisterClick = () => {
+    if (currentType === "consumer") navigate("/registration");
+    else navigate(`/registration/${currentType}`);
   };
 
   return (
@@ -54,24 +55,19 @@ const Registration: React.FC<RegistrationProps> = ({ userType = "consumer" }) =>
             />
             <h1>Indian Market Place</h1>
           </div>
-          <h2>{displayRole} REGISTRATION</h2>
+          <h2>{displayRole} LOGIN</h2>
           <p>
-            Join the Indian Market Place community to explore, connect, and grow
-            your business. Discover suppliers, vendors, and partners across
-            multiple categories — from raw materials to finished goods.
+            Indian Market Place is a unified platform where you can discover everything —
+            from raw materials to finished goods. Buy, sell, and connect with trusted
+            suppliers and vendors on one marketplace.
           </p>
         </div>
 
         {/* RIGHT SIDE */}
         <div className="auth-right">
           <div className="auth-card">
-            <h3>Create Account</h3>
+            <h3>Login</h3>
             <form>
-              <div className="form-group">
-                <label>Full Name</label>
-                <input type="text" placeholder="Enter your full name" required />
-              </div>
-
               <div className="form-group">
                 <label>Email address</label>
                 <input type="email" placeholder="Enter your email" required />
@@ -82,17 +78,21 @@ const Registration: React.FC<RegistrationProps> = ({ userType = "consumer" }) =>
                 <input type="password" placeholder="Enter your password" required />
               </div>
 
+              <div className="remember">
+                <input type="checkbox" id="remember" />
+                <label htmlFor="remember">Remember me</label>
+              </div>
+
               <button type="submit" className="btn-primary">
-                Register
+                Login
               </button>
 
-              {/* ✅ Dynamic navigation back to login */}
               <button
                 type="button"
                 className="btn-secondary"
-                onClick={handleBackToLogin}
+                onClick={handleRegisterClick}
               >
-                Back to Login
+                Registration
               </button>
             </form>
           </div>
@@ -102,4 +102,4 @@ const Registration: React.FC<RegistrationProps> = ({ userType = "consumer" }) =>
   );
 };
 
-export default Registration;
+export default Login;
