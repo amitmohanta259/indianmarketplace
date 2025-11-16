@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import backgroundMap from "../../components/Auth/backgrounds";
-import "../../components/Auth/Auth.css";
+import backgroundMap from "../assets/backgrounds";
+import "../styles/Auth.css";
 
 
 interface LoginProps {
@@ -69,8 +69,8 @@ const Login: React.FC<LoginProps> = ({ userType = "consumer" }) => {
             <h3>Login</h3>
             <form>
               <div className="form-group">
-                <label>Email address</label>
-                <input type="email" placeholder="Enter your email" required />
+                <label> Username </label>
+                <input type="text" placeholder="Enter your username" required />
               </div>
 
               <div className="form-group">

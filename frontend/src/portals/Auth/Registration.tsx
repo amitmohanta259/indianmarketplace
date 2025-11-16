@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import backgroundMap from "../../components/Auth/backgrounds";
-import "../../components/Auth/Auth.css";
+import backgroundMap from "../assets/backgrounds";
+import "../styles/Auth.css";
 
 
 interface RegistrationProps {

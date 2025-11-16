@@ -1,83 +1,105 @@
+// src/components/auth/AuthForm.tsx
 import React, { useState } from "react";
 
 interface AuthFormProps {
   type: "login" | "register";
-  onSubmit: (data: any) => void;
+  onSubmit: (data: { username?: string; password?: string; email?: string; tenantName?: string; fullName?: string }) => void;
   loading?: boolean;
-  error?: string | null;
-  success?: string | null;
+  showTenant?: boolean;
+  showFullName?: boolean;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ type, onSubmit, loading, error, success }) => {
-  const [data, setData] = useState({ email: "", password: "", confirmPassword: "" });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+const AuthForm: React.FC<AuthFormProps> = ({
+  type,
+  onSubmit,
+  loading = false,
+  showTenant = false,
+  showFullName = false,
+}) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [tenantName, setTenantName] = useState("");
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!data.email || !data.password) {
-      alert("Email and password are required");
-      return;
-    }
-
-    if (type === "register" && data.password !== data.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    onSubmit(data);
+    onSubmit({ username, password, email, tenantName, fullName });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white" style={{ width: "400px" }}>
-      <h3 className="text-center mb-3 text-capitalize">{type}</h3>
-
-      {error && <div className="alert alert-danger">{error}</div>}
-      {success && <div className="alert alert-success">{success}</div>}
-
-      <div className="mb-3">
-        <label>Email</label>
-        <input
-          name="email"
-          type="email"
-          value={data.email}
-          onChange={handleChange}
-          className="form-control"
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          name="password"
-          type="password"
-          value={data.password}
-          onChange={handleChange}
-          className="form-control"
-          required
-        />
-      </div>
-
-      {type === "register" && (
-        <div className="mb-3">
-          <label>Confirm Password</label>
+    <form onSubmit={handleSubmit}>
+      {showFullName && (
+        <div className="form-group">
+          <label>Full Name</label>
           <input
-            name="confirmPassword"
-            type="password"
-            value={data.confirmPassword}
-            onChange={handleChange}
-            className="form-control"
+            type="text"
+            placeholder="Enter your full name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
             required
           />
         </div>
       )}
 
-      <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-        {loading ? "Please wait..." : type === "login" ? "Login" : "Register"}
+      {type === "register" && (
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+      )}
+
+      {type === "login" && (
+        <div className="form-group">
+          <label>Username or Email</label>
+          <input
+            type="text"
+            placeholder="Enter your username or email"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+      )}
+
+      <div className="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      {showTenant && (
+        <div className="form-group">
+          <label>Tenant Name</label>
+          <input
+            type="text"
+            placeholder="Enter Tenant Name"
+            value={tenantName}
+            onChange={(e) => setTenantName(e.target.value)}
+            required
+          />
+        </div>
+      )}
+
+      <button type="submit" className="btn-primary" disabled={loading}>
+        {loading
+          ? type === "login"
+            ? "Logging in..."
+            : "Registering..."
+          : type === "login"
+          ? "Login"
+          : "Register"}
       </button>
     </form>
   );

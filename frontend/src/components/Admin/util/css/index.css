@@ -1,0 +1,115 @@
+@font-face {
+  font-family: Sans;
+  src: url("fonts/JUST\ Sans\ Regular.otf");
+}
+@font-face {
+  font-family: AderoTrial;
+  src: url("fonts/AderoTrial-Regular.otf");
+}
+@font-face {
+  font-family: Qrada;
+  src: url("fonts/Qrada.otf");
+}
+@font-face {
+  font-family: Manilla;
+  src: url("fonts/Manilla\ for\ Personal\ Use\ only.otf");
+}
+@font-face {
+  font-family: EBGaramond;
+  src: url("fonts/EB_Garamond/static/EBGaramond-Regular.ttf");
+}
+@font-face {
+  font-family: Oswald;
+  src: url("fonts/Oswald/static/Oswald-Regular.ttf");
+}
+@font-face {
+  font-family: Roboto;
+  src: url("fonts/Roboto/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: Oswald;
+  src: url("fonts/Poppins/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: Quattrocento;
+  src: url("fonts/Quattrocento-Regular.ttf");
+}
+
+body {
+  background-color: white;
+  overflow: hidden;
+}
+.vertical {
+  border-left: 5px solid black;
+  height: 200px;
+}
+.list {
+  margin-bottom: 1rem;
+  font-family: Sans;
+}
+.heading {
+  font-family: Roboto;
+}
+
+.searchIconContainer {
+  background-color: white;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.hrInactive {
+  color: white;
+  opacity: 1;
+  width: 0.3rem;
+  border-width: 10rem 0 0 10rem;
+  border-radius: 1rem 0 0 0;
+  height: 100%;
+  margin-top: 0;
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+}
+
+.hrActive {
+  color: red;
+  opacity: 1;
+  width: 0.3rem;
+  border-width: 10rem 0 0 10rem;
+  border-radius: 1rem 0 0 0;
+  margin-top: 0;
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+}
+
+.navBarElementInactive {
+  border-color: white;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-left: -0.1rem;
+}
+.navBarElementActive {
+  border-color: white;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  margin-left: -0.1rem;
+}
+
+.navbarActiveLinkAlignment {
+  color: black;
+  background-color: #f6f6f6;
+  border-style: hidden;
+  margin-left: -1rem;
+}
+
+.navbarInactiveLinkAlignment {
+  color: black;
+  background-color: white;
+  border-style: hidden;
+  margin-left: -1rem;
+}
+
+/* @media screen and (max-width : 900) {
+  #navbar-content {
+    margin-left: 3rem;
+  }
+} */
+

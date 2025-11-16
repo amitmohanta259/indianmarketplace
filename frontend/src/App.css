@@ -40,3 +40,144 @@
 .read-the-docs {
   color: #888;
 }
+/* Custom CSS for Admin Dashboard */
+.avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.scrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollBar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Sidebar Navigation Styles */
+.navBarElementInactive {
+  border-color: white;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-left: -0.1rem;
+}
+
+.navBarElementActive {
+  border-color: white;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  margin-left: -0.1rem;
+  border-left: 3px solid #dc3545 !important;
+}
+
+.navbarActiveLinkAlignment {
+  color: black;
+  background-color: #f6f6f6;
+  border-style: hidden;
+  margin-left: -1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-left: 3px solid #dc3545 !important;
+}
+
+.navbarInactiveLinkAlignment {
+  color: black;
+  background-color: white;
+  border-style: hidden;
+  margin-left: -1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.navbarActiveLinkAlignment:hover,
+.navbarInactiveLinkAlignment:hover {
+  background-color: #f6f6f6;
+  color: black;
+}
+
+/* Collapsed Sidebar Styles */
+.sidebar-collapsed .navbarActiveLinkAlignment,
+.sidebar-collapsed .navbarInactiveLinkAlignment {
+  justify-content: center;
+  margin-left: -0.5rem;
+  padding: 0.75rem 0.5rem;
+}
+
+.sidebar-collapsed .navBarElementActive {
+  border-left: none !important;
+}
+
+/* Custom card shadows */
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Activity icons */
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .position-fixed {
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-collapsed,
+  .sidebar-expanded {
+    width: 100% !important;
+  }
+}
+
+/* Ensure main content doesn't get hidden behind fixed sidebar */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Scrollable menu area */
+.flex-grow-1.overflow-auto {
+  max-height: calc(100vh - 200px);
+}
+
+/* Fixed bottom section */
+.border-top.pt-3 {
+  background-color: #f8f9fa;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
