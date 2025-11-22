@@ -1,6 +1,9 @@
+/* ============================
+   FONT IMPORTS
+============================ */
 @font-face {
   font-family: Sans;
-  src: url("../../assets/fonts/JUST\ Sans\ Regular.otf");
+  src: url("../../assets/fonts/JUST Sans Regular.otf");
 }
 @font-face {
   font-family: AderoTrial;
@@ -12,7 +15,7 @@
 }
 @font-face {
   font-family: Manilla;
-  src: url("../../assets/fonts/Manilla\ for\ Personal\ Use\ only.otf");
+  src: url("../../assets/fonts/Manilla for Personal Use only.otf");
 }
 @font-face {
   font-family: EBGaramond;
@@ -35,41 +38,37 @@
   src: url("../../assets/fonts/Quattrocento-Regular.ttf");
 }
 
+/* ============================
+   GLOBAL BODY
+============================ */
 body {
   background-color: white;
-  overflow-x: hidden; /* Prevent horizontal scroll only */
-  overflow-y: auto;   /* Allow page to scroll */
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 60px;
+  font-family: Sans, sans-serif;
 }
 
+@media (max-width: 992px) {   /* tablets */
+  body {
+    padding-top: 110px;
+  }
+}
+
+@media (max-width: 576px) {   /* mobile */
+  body {
+    padding-top: 120px;
+  }
+}
 
 .admin-dashboard {
   font-family: Sans, sans-serif;
 }
 
-.vertical {
-  border-left: 5px solid black;
-  height: 200px;
-}
-
-.list {
-  margin-bottom: 1rem;
-  font-family: Sans;
-}
-
-.heading {
-  font-family: Roboto;
-}
-
-.avatar {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-}
-
-.scrollBar::-webkit-scrollbar {
-  display: none;
-}
-
+/* ============================
+   SCROLLBAR HIDE
+============================ */
+.scrollBar::-webkit-scrollbar,
 #right-body::-webkit-scrollbar {
   display: none;
 }
@@ -79,6 +78,9 @@ body {
   scrollbar-width: none;
 }
 
+/* ============================
+   SIDEBAR ELEMENTS
+============================ */
 .sideNavbarElement {
   margin-left: 0.5rem;
   border-left: 0.5rem solid white;
@@ -90,64 +92,57 @@ body {
   border-bottom-left-radius: 0.5rem;
 }
 
+/* ============================
+   ACTIVE / INACTIVE LEFT BORDER
+============================ */
+.hrInactive,
+.hrActive {
+  width: 0.3rem;
+  height: 100%;
+  border-width: 10rem 0 0 10rem;
+  border-radius: 1rem;
+  margin-top: 0;
+}
+
 .hrInactive {
   color: white;
-  opacity: 1;
-  width: 0.3rem;
-  border-width: 10rem 0 0 10rem;
-  border-radius: 1rem 0 0 0;
-  height: 100%;
-  margin-top: 0;
-  border-top-right-radius: 10rem;
-  border-bottom-right-radius: 10rem;
 }
 
 .hrActive {
   color: red;
-  opacity: 1;
-  width: 0.3rem;
-  border-width: 10rem 0 0 10rem;
-  border-radius: 1rem 0 0 0;
-  margin-top: 0;
-  border-top-right-radius: 10rem;
-  border-bottom-right-radius: 10rem;
 }
 
+/* ============================
+   NAVBAR ACTIVE/INACTIVE STYLES
+============================ */
 .navBarElementInactive {
-  border-color: white;
   background-color: white;
   border-radius: 0.5rem;
-  margin-left: -0.1rem;
 }
 
 .navBarElementActive {
-  border-color: white;
   background-color: #f6f6f6;
   border-radius: 0.5rem;
-  margin-left: -0.1rem;
 }
 
-.navbarActiveLinkAlignment {
-  color: black;
-  background-color: #f6f6f6;
-  border-style: hidden;
-  margin-left: -1rem;
+.navbarActiveLinkAlignment,
+.navbarInactiveLinkAlignment {
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
+  margin-left: -1rem;
   text-decoration: none;
+  color: black;
+  border-style: hidden;
+}
+
+.navbarActiveLinkAlignment {
+  background-color: #f6f6f6;
   border-left: 0.5rem solid red !important;
 }
 
 .navbarInactiveLinkAlignment {
-  color: black;
   background-color: white;
-  border-style: hidden;
-  margin-left: -1rem;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
   border-left: 0.5rem solid white;
 }
 
@@ -155,10 +150,11 @@ body {
 .navbarInactiveLinkAlignment:hover {
   background-color: #f6f6f6;
   color: black;
-  text-decoration: none;
 }
 
-/* Card Styles */
+/* ============================
+   CARD STYLES
+============================ */
 .card {
   border: none;
   border-radius: 0.5rem;
@@ -176,14 +172,16 @@ body {
   object-fit: cover;
 }
 
-/* Nav Tabs */
+/* ============================
+   NAV TABS
+============================ */
 .nav-tabs {
   border-bottom: 1px solid #dee2e6;
 }
 
 .nav-tabs .nav-link {
   border: none;
-  color: #6c757d;
+  color: white;
   font-weight: 500;
 }
 
@@ -193,19 +191,23 @@ body {
   border-bottom: 2px solid #0d6efd;
 }
 
-/* Badge Styles */
+/* BADGES */
 .badge {
   font-size: 0.7em;
   font-weight: 600;
 }
 
-/* Responsive Design */
+/* ============================
+   RESPONSIVE FIXES
+============================ */
 @media screen and (max-width: 900px) {
   #navbar-content {
     margin-left: 3rem;
   }
 
-  .col-2, .col-3, .col-7 {
+  .col-2,
+  .col-3,
+  .col-7 {
     width: 100% !important;
     position: relative !important;
     left: 0 !important;

@@ -6,7 +6,30 @@ import RightSidebar from "../../components/Admin/RightSidebar";
 import DashboardContent from "../../components/Admin/DashboardContent";
 import "../styles/AdminDashboard.css";
 
+// --------------------------
+// LOCAL TYPES (No AdminTypes.ts)
+// --------------------------
+type MenuItemType = {
+  id: string;
+  label: string;
+  icon: string;
+  badge?: number;
+};
 
+type TaskItem = {
+  id: string;
+  title: string;
+  module: string;
+  description: string;
+  time: string;
+  assignedUsers: string[];
+};
+
+type UserProfileType = {
+  name: string;
+  email: string;
+  avatar: string;
+};
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("nav-home");
@@ -98,12 +121,15 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="admin-dashboard">
-      {/* TOP NAVBAR */}
-      <div className="row">
+
+      {/* FIXED NAVBAR */}
+      <div className="row position-fixed top-0 start-0 w-100" style={{ zIndex: 1000 }}>
         <Navbar activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
-      <div className="row">
+      {/* PAGE CONTENT - PUSHED BELOW NAVBAR */}
+      <div className="row position-fixed" style={{ marginTop: "70px" }}>
+
         {/* LEFT SIDEBAR */}
         <Sidebar
           mainMenuItems={mainMenuItems}
@@ -116,7 +142,7 @@ const AdminDashboard: React.FC = () => {
           onSearchChange={handleSearchChange}
         />
 
-        {/* MAIN CONTENT */}
+        {/* CENTER CONTENT */}
         <div
           className="col-7 scrollBar"
           style={{
@@ -126,7 +152,7 @@ const AdminDashboard: React.FC = () => {
             left: "16.5%",
           }}
         >
-            <DashboardContent />
+          <DashboardContent />
         </div>
 
         {/* RIGHT SIDEBAR */}

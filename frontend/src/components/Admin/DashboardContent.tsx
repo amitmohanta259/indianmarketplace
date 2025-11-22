@@ -34,7 +34,7 @@ const DashboardContent: React.FC = () => {
       <h4 style={{ paddingTop: '1%' }}>Dashboard</h4>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {cardImages.map((image, index) => (
-          <div key={index} className="col">
+          <div key={index} className="col" style={{ paddingBottom:'1rem'}}>
             <div className="card">
               <img
                 src={image}
@@ -55,6 +55,7 @@ const DashboardContent: React.FC = () => {
         ))}
       </div>
     </div>
+
   );
 };
 
