@@ -25,7 +25,7 @@ const RightSidebar: React.FC<Props> = ({
           <div className="tab-pane fade show active">
             <div className="row">
               <div className="col-5" style={{ margin: "1rem" }}>
-                <div style={{ fontWeight: 600, fontSize: "larger" }}>
+                <div style={{ fontWeight: 600, fontSize: "medium" }}>
                   Today's Task
                 </div>
                 <div style={{ fontWeight: 400, fontSize: "small" }}>
@@ -91,7 +91,7 @@ const RightSidebar: React.FC<Props> = ({
                   aria-selected="true"
                   onClick={() => onTabChange("nav-home")}
                 >
-                  Task
+                  Task One
                 </button>
                 <button
                   className="nav-link"

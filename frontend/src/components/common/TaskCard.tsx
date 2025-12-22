@@ -25,17 +25,24 @@ const TaskCard: React.FC<Props> = ({
       <h4>{title}</h4>
       {module && <p>{module}</p>}
       {description && <p>{description}</p>}
-      {time && <p>{time}</p>}
-
-      {assignedUsers.length > 0 && (
-        <div className="assigned-users">
-          {assignedUsers.map((user, index) => (
-            <img key={index} src={user} alt={`user-${index}`} />
-          ))}
+      <div class="row">
+        <div class="col col-md-6">
+            {time && <p>{time}</p>}
         </div>
-      )}
+        <div class="col col-md-6">
+            {assignedUsers.length > 0 && (
+                    <div className="assigned-users">
+                      {assignedUsers.map((user, index) => (
+                        <img key={index} src={user} alt={`user-${index}`} />
+                      ))}
+                    </div>
+                  )}
+        </div>
 
-      <button onClick={() => onComplete(id)}>Complete</button>
+      </div>
+
+
+
     </div>
   );
 };
