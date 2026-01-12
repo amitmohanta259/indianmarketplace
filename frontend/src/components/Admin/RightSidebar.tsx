@@ -90,6 +90,7 @@ const RightSidebar: React.FC<Props> = ({
                   aria-controls="nav-home"
                   aria-selected="true"
                   onClick={() => onTabChange("nav-home")}
+                  style={{ borderRadius: "0.05px" }}
                 >
                   Task One
                 </button>
@@ -103,6 +104,7 @@ const RightSidebar: React.FC<Props> = ({
                   aria-controls="nav-profile"
                   aria-selected="false"
                   onClick={() => onTabChange("nav-profile")}
+                  style={{ borderRadius: "0.05px" }}
                 >
                   Message
                 </button>
@@ -116,6 +118,7 @@ const RightSidebar: React.FC<Props> = ({
                   aria-controls="nav-contact"
                   aria-selected="false"
                   onClick={() => onTabChange("nav-contact")}
+                  style={{ borderRadius: "0.05px" }}
                 >
                   Modules
                 </button>

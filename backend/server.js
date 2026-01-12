@@ -39,6 +39,12 @@ app.get("/", (req, res) =>
   res.status(200).send("✅ Multi-tenant Marketplace API running")
 );
 
+// Simple test endpoint to verify server connectivity
+app.get("/test", (req, res) => {
+  console.log("✅ /test route hit");
+  res.json({ message: "Server is working" });
+});
+
 // ---------------- ERROR HANDLING ----------------
 app.use((req, res) => res.status(404).json({ error: "Route not found" }));
 app.use((err, req, res, next) => {
@@ -47,7 +53,9 @@ app.use((err, req, res, next) => {
 });
 
 // ---------------- START SERVER ----------------
+// Bind explicitly to IPv4 to prevent curl/Postman hangs
 const PORT = process.env.PORT || 5006;
-app.listen(PORT, () =>
-  console.log(`🚀 Server running on http://localhost:${PORT}`)
-);
+app.listen(PORT, "127.0.0.1", () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+
 import accountIcon from "../../assets/adminutil/photo/icons8-notification.gif";
 import homeIcon from "../../assets/adminutil/photo/icons8-home.gif";
 import taskIcon from "../../assets/adminutil/photo/icons8-checked-checkbox.gif";
 import activityIcon from "../../assets/adminutil/photo/icons8-activity.gif";
 import usersIcon from "../../assets/adminutil/photo/icons8-user.gif";
 import notificationsIcon from "../../assets/adminutil/photo/icons8-notification.gif";
+import logoutIcon from "../../assets/adminutil/photo/icons8-imac-exit-24.png";
 type MenuItem = {
   key: string;
   label: string;
@@ -24,21 +26,36 @@ const menuItems: MenuItem[] = [
     icon: notificationsIcon,
     badge: 9,
   },
+  {
+      key: "setting",
+      label: "Setting",
+      icon: usersIcon,
+    },
 ];
 
 const LeftSidebar: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState<string>("home");
+  const [activeMenu, setActiveMenu] = useState("home");
 
   return (
     <div
-      className="col-2"
-      style={{ position: "fixed", left: 0, height: "100vh" }}
+      className="d-flex flex-column"
+      style={{
+        position: "fixed",
+        top: "56px",
+        left: 0,
+        width: "16.6667%",
+        height: "calc(100vh - 56px)",
+        padding: "1rem",
+        backgroundColor: "#fff",
+      }}
     >
-      {/* Menu */}
-      <div className="row mt-3">
-        <div style={{ fontSize: "0.8rem", fontWeight: 500 }}>Menu</div>
+      {/* ===== MENU ===== */}
+      <div>
+        <div className="mb-2" style={{ fontSize: "0.8rem", fontWeight: 500 }}>
+          Menu
+        </div>
 
-        <div className="list-group">
+        <div className="list-group list-group-flush">
           {menuItems.map((item) => {
             const isActive = activeMenu === item.key;
 
@@ -46,40 +63,33 @@ const LeftSidebar: React.FC = () => {
               <div
                 key={item.key}
                 style={{
-                  marginLeft: "0.5rem",
                   marginBottom: "4px",
-                  borderLeft: `0.5rem solid ${
-                    isActive ? "red" : "white"
+                  borderLeft: `4px solid ${
+                    isActive ? "red" : "transparent"
                   }`,
-                  borderRadius: "5px",
-
+                  borderRadius: "4px",
                 }}
               >
                 <button
                   type="button"
                   onClick={() => setActiveMenu(item.key)}
-                  className={`list-group-item list-group-item-action d-flex align-items-center position-relative`}
+                  className="list-group-item list-group-item-action d-flex align-items-center"
                   style={{
                     border: "none",
-                    background: "transparent",
-                    width: "100%",
-                    textAlign: "left",
+                    backgroundColor: "transparent",
                   }}
                 >
                   <img
                     src={item.icon}
-                    alt=""
+                    alt={item.label}
                     width={18}
                     height={16}
-                    style={{ marginRight: "6px" }}
+                    className="me-2"
                   />
-                  {item.label}
+                  <span>{item.label}</span>
 
                   {item.badge && (
-                    <span
-                      className="badge bg-danger position-absolute top-50 start-100 translate-middle"
-                      style={{ marginLeft: "-1rem" }}
-                    >
+                    <span className="badge bg-danger ms-auto">
                       {item.badge}
                     </span>
                   )}
@@ -87,6 +97,53 @@ const LeftSidebar: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* ===== PROFILE (BOTTOM FIXED) ===== */}
+      <div style={{ marginTop: "auto" }}>
+        <div
+          className="p-2"
+          style={{
+            backgroundColor: "#fff",
+            borderRadius: "0.5rem",
+          }}
+        >
+          <div className="row align-items-center g-2">
+            <div className="col-3">
+              <img
+                src="https://images.unsplash.com/photo-1582233479366-6d38bc390a08"
+                alt="profile"
+                className="img-fluid"
+                style={{ borderRadius: "0.5rem" }}
+              />
+            </div>
+
+            <div className="col-7">
+              <div style={{ fontSize: "0.85rem", fontWeight: 500 }}>
+                Amit Mohanta
+              </div>
+              <div
+                style={{
+                  fontSize: "0.7rem",
+                  color: "#6c757d",
+                }}
+              >
+                amitmohanta@gmail.com
+              </div>
+            </div>
+
+            <div className="col-2 text-end" style={{marginTop:"-0.5rem"}}>
+              <img
+                src={logoutIcon}
+                alt="Logout"
+                width={18}
+                height={16}
+                style={{ cursor: "pointer" }}
+                onClick={() => console.log("Logout clicked")}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
